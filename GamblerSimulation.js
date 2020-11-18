@@ -1,3 +1,4 @@
 const Util = require('./Utility');
 console.log("Welcome to Gambling simulation!");
-console.log("stake:",Util.stake,"bet:",Util.bet);
+Util.gambleWinOrLoose();
+console.log("stake:",Util.dailyStake);

@@ -1,10 +1,29 @@
 class UtilityGamblerSimulation{
- stake = 100
+ dailyStake = 100
  bet = 1
-contructor()
-{
-    this.stake=stake;
-    this.bet=bet;
- }
+
+ constructor(win, lose){
+    this.win = win;
+    this.lose = lose;
 }
-module.exports = new UtilityGamblerSimulation();
+checkWinOrLoose(){
+    return Math.floor(Math.random() * Math.floor(1));
+}
+gambleWinOrLoose(){
+    let result = this.checkWinOrLoose();
+
+    if (result == 1) {
+        this.win += 1;
+        this.dailyStake += 1;
+        console.log( "You won 1 dollar")
+    }
+    if (result == 0) {
+        this.lose += 1;
+        this.dailyStake -= 1;
+        console.log("You lost 1 dollar")
+    }
+
+}
+
+}
+module.exports = new UtilityGamblerSimulation(0,0);
