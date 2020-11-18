@@ -1,10 +1,12 @@
 class UtilityGamblerSimulation {
-    dailyStake = 100
-    bet = 1
-
+    
     constructor(win, lose) {
+        this.dailyStake = 100
+        this.bet = 1
         this.win = win;
         this.lose = lose;
+        this.totalDays = 0;
+        this.totalAmount = 0;
     }
     checkWinOrLoose() {
         return Math.floor(Math.random() * Math.floor(1));
@@ -25,6 +27,23 @@ class UtilityGamblerSimulation {
             }
 
         }
+    }
+    //Calling the checkWinOrLoose method 20 times//
+    resultAfter20Days() {
+        try {
+            while (this.totalDays < 20) {
+                console.log("Day:" + this.totalDays);
+                this.checkWinOrLoose();
+                this.totalAmount = this.totalAmount + this.dailyStake;
+                this.dailyStake = 100;
+                this.totalDays++;
+            }
+            console.log("Total Days: " + this.totalDays);
+        }
+        catch (e) {
+            console.log("Exception: " + e);
+        }
+
     }
 
 }
