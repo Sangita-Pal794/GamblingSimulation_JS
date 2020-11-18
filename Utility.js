@@ -4,7 +4,7 @@ class UtilityGamblerSimulation{
 contructor()
 {
     this.stake=stake;
-    this.bet=bet
+    this.bet=bet;
  }
 }
 module.exports = new UtilityGamblerSimulation();
