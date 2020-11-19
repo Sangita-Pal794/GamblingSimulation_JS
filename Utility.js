@@ -1,16 +1,24 @@
 class UtilityGamblerSimulation {
-    
-    constructor(win, lose) {
+    constructor() {
         this.dailyStake = 100
         this.bet = 1
-        this.win = win;
-        this.lose = lose;
+        this.win = 0;
+        this.lose = 0;
         this.totalDays = 0;
         this.totalAmount = 0;
+        this.MAX_DAYS = 30;
+        this.dailyAmount = [];
+        this.newStake = 0;
+        this.finalAmt= 0;
     }
     checkWinOrLoose() {
         return Math.floor(Math.random() * Math.floor(1));
     }
+    /**
+     * Checking the condition 
+     * between 150 & 50 of stake amount in 
+     * @params(dailyStake)
+     */
     gambleWinOrLoose() {
         let result = this.checkWinOrLoose();
 
@@ -28,17 +36,19 @@ class UtilityGamblerSimulation {
 
         }
     }
-    //Calling the checkWinOrLoose method 20 times//
-    resultAfter20Days() {
+    //Calling the checkWinOrLoose method 30 times//
+    resultAfter30Days() {
         try {
-            while (this.totalDays < 20) {
+            for (day = 1; day <= this.MAX_DAYS; day++) {
                 console.log("Day:" + this.totalDays);
-                this.checkWinOrLoose();
+                this.gambleWinOrLoose();
                 this.totalAmount = this.totalAmount + this.dailyStake;
+                this.dailyAmount[this.totalDays]=this.totalAmount;
+                this.finalAmt=this.finalAmt+this.totalAmount;
                 this.dailyStake = 100;
-                this.totalDays++;
             }
-            console.log("Total Days: " + this.totalDays);
+            console.log("Total Days: " + this.totalDays + " Total amount: " + this.totalAmount);
+
         }
         catch (e) {
             console.log("Exception: " + e);
@@ -46,5 +56,23 @@ class UtilityGamblerSimulation {
 
     }
 
+    printDailyAmt() {
+        var day
+        for (day = 1; day <= this.MAX_DAYS; day++) {
+            console.log("Final Amount On Day" + day +" "+this.dailyAmount[day]);
+        }
+    }
+
+   /**
+    * Calculation of won or lost amount per day
+    *  */ winOrLose(){
+        for (day = 1; day <= this.MAX_DAYS; day++){
+        if(this.finalAmt<this.dailyStake)
+        console.log("You lost by"+ day + " "+(this.dailyStake-this.finalAmt));
+        else
+        console.log("You won by"+ day + " "+(this.finalAmt-this.dailyStake));
+        }
+
+    }
 }
-module.exports = new UtilityGamblerSimulation(0, 0);
+module.exports = new UtilityGamblerSimulation();
