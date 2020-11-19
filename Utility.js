@@ -10,6 +10,10 @@ class UtilityGamblerSimulation {
         this.dailyAmount = [];
         this.newStake = 0;
         this.finalAmt= 0;
+        this.tempWin = 0;
+        this.tempLose = 0;
+        this.luckiestDay = 0;
+        this.unluckiestDay = 0;
     }
     checkWinOrLoose() {
         return Math.floor(Math.random() * Math.floor(1));
@@ -33,7 +37,16 @@ class UtilityGamblerSimulation {
                 this.dailyStake -= 1;
                 console.log("You lost 1 dollar")
             }
-
+            if (this.win > this.tempWin && this.dailyStake == 150) {
+                this.tempWin = this.win;
+                this.luckiestDay = this.totalDays;
+            }
+            if (this.lose > this.bestLose && this.dailyStake == 50) {
+                this.tempLose = this.lose;
+                this.unluckiestDay = this.totalDays;
+            }
+            this.win = 0;
+            this.lose = 0;
         }
     }
     //Calling the checkWinOrLoose method 30 times//
@@ -48,6 +61,7 @@ class UtilityGamblerSimulation {
                 this.dailyStake = 100;
             }
             console.log("Total Days: " + this.totalDays + " Total amount: " + this.totalAmount);
+            console.log("Luckiest Day: " + this.luckiestDay + " Unluckiest Day: " + this.unluckiestDay)
 
         }
         catch (e) {
